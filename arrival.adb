@@ -1,19 +1,22 @@
-with Ada.Calendar;
+with Ada.Real_Time;
 with Ada.Text_IO;
+with Ada.Numerics.Float_Random;
 
 with Bricks;
 with Wall;
 
 package body Arrival is
 
-   use Ada.Calendar;
+   use Ada.Real_Time;
+   use Ada.Numerics.Float_Random;
 
-   Initial_Delay : constant := 0.6;
-   Delay_Time    : Duration;
+   Initial_Delay : Time_Span := Milliseconds(600);
+   Delay_Time    : Time_Span;
 
    type Unsigned is range 0 .. 2 ** 16;
 
-   Seed : Unsigned := Unsigned (Float (Seconds (Clock)) / 10.0);
+   Seed : Unsigned := Unsigned(Float (To_Duration
+     (Time_Span (Clock - Time_First))) / 10.0);
 
    ------------------
    -- Cheap_Random --
@@ -44,7 +47,7 @@ package body Arrival is
                accept Stop;
                exit Middle;
             or
-               delay Delay_Time;
+               delay until Clock + Delay_Time;
             end select;
 
             --  Display it
@@ -69,7 +72,7 @@ package body Arrival is
                      accept Stop;
                      exit Middle;
                   or
-                     delay Delay_Time;
+                     delay until Clock + Delay_Time;
                   end select;
                   Bricks.Move.Drop (Ok);
                   if not Ok then
@@ -96,7 +99,7 @@ package body Arrival is
                accept Stop;
                exit Main;
             or
-               delay Delay_Time;
+               delay until Clock + Delay_Time;
             end select;
             select
                Manager.Tick;
@@ -122,7 +125,7 @@ package body Arrival is
                   accept Stop;
                   exit Middle;
                or
-                  delay Delay_Time;
+                  delay until Clock + Delay_Time;
                end select;
             end loop;
             Delay_Time := Delay_Time * 9 / 10;
