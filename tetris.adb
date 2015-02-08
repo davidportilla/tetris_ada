@@ -17,7 +17,7 @@ begin
       Screen.MoveCursor ((Column => 1, Row => 5));
       Text_IO.Put_Line ("2=drop 4=left 5=spin 6=right");
 
-      Bricks.Move.Start;
+      Bricks.Start;
       Arrival.Manager.Start;
       Arrival.Timer.Start;
       Arrival.Speeder.Start;
@@ -32,35 +32,20 @@ begin
          case Ch is
             when '2' => -- Down arrow
                loop
-                  select
-                     Bricks.Move.Drop (Ok);
-                  else
-                     Ok := True; -- Keep dropping the brick
-                  end select;
+                  Bricks.Drop_Brick (Ok);
+                  --Ok := True; -- Keep dropping the brick
                   exit when not Ok;
                end loop;
                delay 1.0;
 
             when '4' => -- Left arrow
-               select
-                  Bricks.Move.Left;
-               else
-                  null;
-               end select;
+              Bricks.Move_Left;
 
             when '5' => -- blank
-               select
-                  Bricks.Move.Rotation;
-               else
-                  null;
-               end select;
+              Bricks.Move_Rotate;
 
             when '6' => -- Right arrow
-               select
-                  Bricks.Move.Right;
-               else
-                  null;
-               end select;
+              Bricks.Move_Right;
 
             when others =>
                null;
@@ -69,16 +54,12 @@ begin
 
       Arrival.Speeder.Stop;
       Arrival.Timer.Stop;
-      Bricks.Move.Stop;
+      Bricks.Stop;
       Arrival.Manager.Stop;
 
       exit when Ch /= 'Y' and Ch /= 'y';
    end loop;
 
    Screen.ClearScreen;
-   abort Bricks.Move;
-   abort Arrival.Timer;
-   abort Arrival.Manager;
-   abort Arrival.Speeder;
 
 end Tetris;

@@ -23,6 +23,16 @@ package body Bricks is
    -- Put_F --
    -----------
 
+   procedure Start is
+   begin
+     Text_IO.Put_Line("bricks start");
+   end Start;
+
+   procedure Stop is
+   begin
+     Text_IO.Put_Line("bricks stop");
+ end Stop;
+
    procedure Put_F
      (X     : in Wall.Width;
       Y     : in Wall.Height;
@@ -128,62 +138,5 @@ package body Bricks is
          Exit_Flag := True;
       end if;
    end Drop_Brick;
-
-   ----------
-   -- Move --
-   ----------
-
-   task body Move is
-   begin
-      Outer : loop
-         accept Start;
-         Finished_Flag := False;
-         Middle : loop
-            Exit_Flag := False;
-            accept Put (
-              X      : in Wall.Width;
-               Y     : in Wall.Height;
-               Brick : in Wall.Brick_Type;
-               Done  : out Boolean) do
-
-               Put_F (X, Y, Brick, Done);
-               Wall.Put (Brick, X, Y);
-            end Put;
-            Inner : loop
-               select
-                  accept Right do
-                     Move_Right;
-                  end Right;
-               or
-                  accept Left do
-                     Move_Left;
-                  end Left;
-               or
-                  accept Rotation do
-                     Move_Rotate;
-                  end Rotation;
-               or
-                  accept Drop (Ok : out Boolean) do
-                     Drop_Brick (Ok);
-                  end Drop;
-               or
-                  accept Stop;
-                  exit Middle;
-               end select;
-
-               if Exit_Flag then
-                  select
-                     accept Drop (Ok : out Boolean) do
-                        Ok := False;
-                     end Drop;
-                  or
-                     delay 1.0;
-                  end select;
-                  exit Inner;
-               end if;
-            end loop Inner;
-         end loop Middle;
-      end loop Outer;
-   end Move;
 
 end Bricks;

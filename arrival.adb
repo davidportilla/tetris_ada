@@ -1,6 +1,5 @@
 with Ada.Real_Time;
 with Ada.Text_IO;
-with Ada.Numerics.Float_Random;
 
 with Bricks;
 with Wall;
@@ -8,7 +7,6 @@ with Wall;
 package body Arrival is
 
    use Ada.Real_Time;
-   use Ada.Numerics.Float_Random;
 
    Initial_Delay : Time_Span := Milliseconds(600);
    Delay_Time    : Time_Span;
@@ -51,7 +49,7 @@ package body Arrival is
             end select;
 
             --  Display it
-            Bricks.Move.Put
+            Bricks.Put_F
               (X     => 5,
                Y     => 2,
                Brick => Wall.Pick (Style),
@@ -74,7 +72,7 @@ package body Arrival is
                   or
                      delay until Clock + Delay_Time;
                   end select;
-                  Bricks.Move.Drop (Ok);
+                  Bricks.Drop_Brick (Ok);
                   if not Ok then
                      exit;
                   end if;
