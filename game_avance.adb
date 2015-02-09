@@ -6,16 +6,13 @@ with Text_IO;
 
 package body game_avance is
 
-  type Unsigned is range 0 .. 2 ** 16;
+  package Random_Integer is new Ada.Numerics.Discrete_Random (Integer);
+  int_generator : Random_Integer.Generator;
 
-  --Seed : Unsigned (Float (To_Duration
-  --       (Time_Span (Clock - Time_First))) / 10.0);
-
-  --function Cheap_Random return Integer is
-  --begin
-  --  Seed := (Seed * 25173 + 13849) mod 2 ** 16;
-  --  return Integer (Seed mod 2 ** 15);
-  --end Cheap_Random;
+  function getRandomInt return Integer is
+  begin
+    return Random_Integer.Random(int_generator);
+  end getRandomInt;
 
   task body put_and_drop is
     T : Time := Clock;
@@ -23,8 +20,9 @@ package body game_avance is
     done : boolean; -- true if we can place the brick
     brick_style : Wall.Styles;
   begin
+    Random_Integer.Reset(int_generator);
     loop
-      brick_style := Wall.Styles (Cheap_Random mod Wall.Styles'Last + 1);
+      brick_style := Wall.Styles (getRandomInt mod Wall.Styles'Last + 1);
       Bricks.Put_F(5, 2, Wall.Pick(brick_style), done);
       exit when done;
       loop

@@ -7,14 +7,9 @@ with User_Interaction;
 with Text_IO;
 
 procedure Tetris is
-   pragma Priority (4);
-
-   user_input: character;
-   available: boolean;
-   T: Time := Clock;
 
    begin
-
+      -- initialization
       Screen.ClearScreen;
       Wall.Initialize;
       Screen.MoveCursor ((Column => 10, Row => 3));

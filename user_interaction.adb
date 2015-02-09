@@ -5,18 +5,6 @@ with Bricks;
 
 package body user_interaction is
 
-  --loop
-  --  Text_IO.Get_Immediate (user_input, available);
-  --  exit when available;
-  --  T := T + milliseconds(10);
-  --  delay until T;
---end loop;
--- 2 down arrow
--- 4 left arrow
--- 6 right arrow
--- 5 rotate
--- Y exit
-
   task body take_user_input is
     user_input: character;
     available: boolean;
@@ -25,7 +13,6 @@ package body user_interaction is
     loop
       Text_IO.Get_Immediate (user_input, available);
       if available then
-        --Text_IO.Put_Line("user input: " & character'Image(user_input) );
         case user_input is
           when '2' => Shared_Action.SetAction(Drop);
           when '4' => Shared_Action.SetAction(Left);
