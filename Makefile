@@ -1,5 +1,5 @@
 all:
-	gnatmake tetris.adb
+	gnatmake tetris.adb -o tetris.out
 
 clean:
 	-rm -f *~

@@ -5,4 +5,4 @@
 *.ali
 
 #compiled program
-/tetris
+*.out
