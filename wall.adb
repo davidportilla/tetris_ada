@@ -1,4 +1,5 @@
-with Screen, Text_IO;
+with Screen;
+with Text_IO;
 package body Wall is
 
    subtype Width_Inner is Width range

@@ -1,5 +1,10 @@
 with Ada.Real_Time; use Ada.Real_Time;
-with Screen, Bricks, Wall, Game_Avance, User_Interaction, Text_IO;
+with Screen;
+with Bricks;
+with Wall;
+with Game_Avance;
+with User_Interaction;
+with Text_IO;
 
 procedure Tetris is
    pragma Priority (4);

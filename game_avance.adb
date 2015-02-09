@@ -1,23 +1,24 @@
-with Bricks; with Wall;
-with Ada.Real_Time; use Ada.Real_Time; with Text_IO;
+with Bricks;
+with Wall;
+with Ada.Real_Time; use Ada.Real_Time;
+with Ada.Numerics.Discrete_Random;
+with Text_IO;
 
 package body game_avance is
 
-  T : Time := Clock;
-
   type Unsigned is range 0 .. 2 ** 16;
 
-  Seed : Unsigned := 3;
-  --Unsigned(Float (To_Duration
-  --(Time_Span (Clock - Time_First))) / 10.0);
+  --Seed : Unsigned (Float (To_Duration
+  --       (Time_Span (Clock - Time_First))) / 10.0);
 
-  function Cheap_Random return Integer is
-  begin
-    Seed := (Seed * 25173 + 13849) mod 2 ** 16;
-    return Integer (Seed mod 2 ** 15);
-  end Cheap_Random;
+  --function Cheap_Random return Integer is
+  --begin
+  --  Seed := (Seed * 25173 + 13849) mod 2 ** 16;
+  --  return Integer (Seed mod 2 ** 15);
+  --end Cheap_Random;
 
   task body put_and_drop is
+    T : Time := Clock;
     ok : boolean; -- true if we can drop the brick
     done : boolean; -- true if we can place the brick
     brick_style : Wall.Styles;

@@ -1,4 +1,7 @@
-with Actions, Text_IO, Ada.Real_Time, Bricks; use Actions, Ada.Real_Time;
+with Actions; use Actions;
+with Text_IO;
+with Ada.Real_Time; use Ada.Real_Time;
+with Bricks;
 
 package body user_interaction is
 
