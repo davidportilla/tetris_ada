@@ -22,7 +22,6 @@ package body game_avance is
     done : boolean; -- true if we can place the brick
     brick_style : Wall.Styles;
   begin
-    Text_IO.Put_Line("put and drop");
     loop
       brick_style := Wall.Styles (Cheap_Random mod Wall.Styles'Last + 1);
       Bricks.Put_F(5, 2, Wall.Pick(brick_style), done);
@@ -33,6 +32,7 @@ package body game_avance is
         Bricks.Drop_Brick(ok);
         exit when not ok;
       end loop;
+      Wall.Erase_Lines;
     end loop;
 
   end put_and_drop;
