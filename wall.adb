@@ -1,5 +1,6 @@
 with Screen;
 with Text_IO;
+with Ada.Real_Time; use Ada.Real_Time;
 package body Wall is
 
    subtype Width_Inner is Width range
@@ -157,6 +158,7 @@ package body Wall is
       Line_No     : array (Height_Inner) of Height_Inner;
       No_Of_Lines : Natural := Height_Inner'First - 1;
       Attribute   : Boolean := True;
+      T : Time := Clock;
    begin
       for Y in Height_Inner loop
          for X in Width_Inner loop
@@ -175,7 +177,8 @@ package body Wall is
                   Put (X, Line_No (I), Attribute);
                end loop;
             end loop;
-            delay 0.1;
+            T := T + milliseconds(100);
+            delay until T;
          end loop;
          for I in Height_Inner'First .. No_Of_Lines loop
             Tetris_Wall (Height_Inner'First + 1 .. Line_No (I))  :=
