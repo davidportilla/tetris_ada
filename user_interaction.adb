@@ -18,7 +18,8 @@ package body user_interaction is
           when '4' => Shared_Action.SetAction(Left);
           when '5' => Shared_Action.SetAction(Rotate);
           when '6' => Shared_Action.SetAction(Right);
-          --when 'Y' => null;
+          when 'y' => null; -- restart
+          when 'n' => null; -- exit
           when others => null;
         end case;
       end if;
@@ -30,11 +31,19 @@ package body user_interaction is
   task body send_user_input is
     command : ActionMode;
     ok : boolean;
+    T: Time := Clock;
+
   begin
     loop
       Shared_Action.GetAction(command);
       case command is
-        when Drop => Bricks.Drop_Brick(ok);
+        when Drop =>
+          loop
+            Bricks.Drop_Brick(ok);
+            exit when not ok;
+            T := T + milliseconds(10);
+            delay until T;
+          end loop;
         when Left => Bricks.Move_Left;
         when Rotate => Bricks.Move_Rotate;
         when Right => Bricks.Move_Right;
