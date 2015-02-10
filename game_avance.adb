@@ -16,6 +16,9 @@ package body game_avance is
 
   task body put_and_drop is
     T : Time := Clock;
+    initial_delay : Time_Span := milliseconds(600);
+    speeder : Time_Span := milliseconds(0);
+    counter : Integer := 0;
     ok : boolean; -- true if we can drop the brick
     done : boolean; -- true if we can place the brick
     brick_style : Wall.Styles;
@@ -26,8 +29,12 @@ package body game_avance is
       Bricks.Put_F(5, 2, Wall.Pick(brick_style), done);
       exit when done;
       loop
-        T := T + milliseconds(600);
+        T := T + initial_delay - speeder;
         delay until T;
+        if ((counter mod 10) = 0) then
+          speeder := speeder + milliseconds(10);
+        end if;
+        counter := counter + 1;
         Bricks.Drop_Brick(ok);
         exit when not ok;
       end loop;

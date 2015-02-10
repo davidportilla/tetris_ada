@@ -18,8 +18,6 @@ package body user_interaction is
           when '4' => Shared_Action.SetAction(Left);
           when '5' => Shared_Action.SetAction(Rotate);
           when '6' => Shared_Action.SetAction(Right);
-          when 'y' => null; -- restart
-          when 'n' => null; -- exit
           when others => null;
         end case;
       end if;
@@ -47,8 +45,6 @@ package body user_interaction is
         when Left => Bricks.Move_Left;
         when Rotate => Bricks.Move_Rotate;
         when Right => Bricks.Move_Right;
-        --when Exit => null;
-        --when others => null;
       end case;
     end loop;
   end send_user_input;

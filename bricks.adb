@@ -46,7 +46,7 @@ package body Bricks is
          Done          := True;
          Finished_Flag := True;
          Screen.MoveCursor ((Column => 10, Row => 12));
-         Text_IO.Put_Line ("Try Again [Y/N] ?");
+         Text_IO.Put_Line ("Game over. Exit: Ctrl+C");
       end if;
       Move_X     := X;
       Move_Y     := Y;
