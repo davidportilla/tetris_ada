@@ -3,7 +3,6 @@ with Text_IO;
 with Ada.Real_Time; use Ada.Real_Time;
 with Bricks; use Bricks;
 with Screen;
-with Wall;
 with GNAT.OS_Lib;
 
 package body user_interaction is
@@ -59,7 +58,6 @@ package body user_interaction is
           end if;
         when Restart =>
           if Bricks_Functions.Finished then
-            Bricks_Functions.Init_Game;
             Shared_Restart.Restart_Request;
           end if;
       end case;

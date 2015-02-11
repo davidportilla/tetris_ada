@@ -1,9 +1,7 @@
 with Bricks; use Bricks;
 with Wall;
-with Screen;
 with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Numerics.Discrete_Random;
-with Text_IO;
 with Actions; use Actions;
 
 package body game_avance is
@@ -26,6 +24,7 @@ package body game_avance is
     brick_style : Wall.Styles;
   begin
     loop
+      Bricks_Functions.Init_Game;
       speeder := milliseconds(0);
       counter := 0;
       Random_Integer.Reset(int_generator);

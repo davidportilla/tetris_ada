@@ -1,7 +1,6 @@
 with Text_IO;
 with Screen;
 with Wall;
-with Text_IO;
 
 package body Bricks is
 
