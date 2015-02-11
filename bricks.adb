@@ -1,5 +1,7 @@
 with Text_IO;
 with Screen;
+with Wall;
+with Text_IO;
 
 package body Bricks is
 
@@ -19,19 +21,24 @@ package body Bricks is
    New_Brick, Move_Brick : Wall.Brick_Type;
    Exit_Flag             : Boolean := False;
 
+   -------------------
+   -- Init new game --
+   -------------------
+
+   procedure init_game is
+   begin
+     Finished_Flag := False;
+     Screen.ClearScreen;
+     Wall.Initialize;
+     Screen.MoveCursor ((Column => 10, Row => 3));
+     Text_IO.Put_Line (" TETRIS Ada ");
+     Screen.MoveCursor ((Column => 1, Row => 5));
+     Text_IO.Put_Line ("2=drop 4=left 5=spin 6=right");
+   end init_game;
+
    -----------
    -- Put_F --
    -----------
-
-   procedure Start is
-   begin
-     Text_IO.Put_Line("bricks start");
-   end Start;
-
-   procedure Stop is
-   begin
-     Text_IO.Put_Line("bricks stop");
- end Stop;
 
    procedure Put_F
      (X     : in Wall.Width;
@@ -46,7 +53,7 @@ package body Bricks is
          Done          := True;
          Finished_Flag := True;
          Screen.MoveCursor ((Column => 10, Row => 12));
-         Text_IO.Put_Line ("Game over. Exit: Ctrl+C");
+         Text_IO.Put_Line ("Try Again [Y/N] ?");
       end if;
       Move_X     := X;
       Move_Y     := Y;

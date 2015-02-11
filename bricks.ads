@@ -5,6 +5,7 @@ package Bricks is
 
    function Finished return Boolean;
 
+   procedure Init_Game;
    procedure Put_F
     (X     : in Wall.Width;
      Y     : in Wall.Height;
@@ -14,7 +15,5 @@ package Bricks is
    procedure Move_Left;
    procedure Move_Rotate;
    procedure Drop_Brick (Ok : out Boolean);
-   procedure Start;
-   procedure Stop;
 
 end Bricks;

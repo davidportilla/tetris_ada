@@ -9,12 +9,6 @@ with Text_IO;
 procedure Tetris is
 
    begin
-      -- initialization
-      Screen.ClearScreen;
-      Wall.Initialize;
-      Screen.MoveCursor ((Column => 10, Row => 3));
-      Text_IO.Put_Line (" TETRIS Ada ");
-      Screen.MoveCursor ((Column => 1, Row => 5));
-      Text_IO.Put_Line ("2=drop 4=left 5=spin 6=right");
+      bricks.init_game;
 
 end Tetris;

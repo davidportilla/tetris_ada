@@ -2,8 +2,13 @@ with Actions; use Actions;
 with Text_IO;
 with Ada.Real_Time; use Ada.Real_Time;
 with Bricks;
+with Screen;
+with Wall;
+with GNAT.OS_Lib;
 
 package body user_interaction is
+
+  Exit_Status : Integer := 0; -- status code for program termination
 
   task body take_user_input is
     user_input: character;
@@ -18,6 +23,8 @@ package body user_interaction is
           when '4' => Shared_Action.SetAction(Left);
           when '5' => Shared_Action.SetAction(Rotate);
           when '6' => Shared_Action.SetAction(Right);
+          when 'y' => Shared_Action.SetAction(Restart);
+          when 'n' => Shared_Action.SetAction(Exit_Tetris);
           when others => null;
         end case;
       end if;
@@ -45,6 +52,15 @@ package body user_interaction is
         when Left => Bricks.Move_Left;
         when Rotate => Bricks.Move_Rotate;
         when Right => Bricks.Move_Right;
+        when Exit_Tetris =>
+          if Bricks.Finished then
+            GNAT.OS_Lib.OS_Exit(Exit_Status);
+          end if;
+        when Restart =>
+          if Bricks.Finished then
+            Bricks.Init_Game;
+            Shared_Restart.Restart_Request;
+          end if;
       end case;
     end loop;
   end send_user_input;

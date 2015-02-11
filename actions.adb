@@ -16,4 +16,18 @@ package body Actions is
 
   end Shared_Action;
 
+  protected body Shared_Restart is
+
+    procedure Restart_Request is
+    begin
+      flag := true;
+    end Restart_Request;
+
+    entry Wait_For_Restart when flag is
+    begin
+      flag := false;
+    end Wait_For_Restart;
+
+  end Shared_Restart;
+
 end Actions;
