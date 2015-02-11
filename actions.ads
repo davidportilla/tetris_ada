@@ -2,7 +2,7 @@ package Actions is
 
 type ActionMode is (Left, Right, Rotate, Drop, Restart, Exit_Tetris);
 
-protected Shared_Action is
+protected Protected_Action is
 
    procedure SetAction (X: in ActionMode);
    entry GetAction (X: out ActionMode);
@@ -11,9 +11,9 @@ protected Shared_Action is
      action : ActionMode;
      flag : boolean := false;
 
-end Shared_Action;
+end Protected_Action;
 
-protected Shared_Restart is
+protected Protected_Restart is
 
   procedure Restart_Request;
   entry Wait_For_Restart;
@@ -21,6 +21,6 @@ protected Shared_Restart is
   private
   flag : boolean := false;
 
-end Shared_Restart;
+end Protected_Restart;
 
 end Actions;

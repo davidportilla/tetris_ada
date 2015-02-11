@@ -18,12 +18,12 @@ package body user_interaction is
       Text_IO.Get_Immediate (user_input, available);
       if available then
         case user_input is
-          when '2' => Shared_Action.SetAction(Drop);
-          when '4' => Shared_Action.SetAction(Left);
-          when '5' => Shared_Action.SetAction(Rotate);
-          when '6' => Shared_Action.SetAction(Right);
-          when 'y' | 'Y' => Shared_Action.SetAction(Restart);
-          when 'n' | 'N' => Shared_Action.SetAction(Exit_Tetris);
+          when '2' => Protected_Action.SetAction(Drop);
+          when '4' => Protected_Action.SetAction(Left);
+          when '5' => Protected_Action.SetAction(Rotate);
+          when '6' => Protected_Action.SetAction(Right);
+          when 'y' | 'Y' => Protected_Action.SetAction(Restart);
+          when 'n' | 'N' => Protected_Action.SetAction(Exit_Tetris);
           when others => null;
         end case;
       end if;
@@ -39,7 +39,7 @@ package body user_interaction is
 
   begin
     loop
-      Shared_Action.GetAction(command);
+      Protected_Action.GetAction(command);
       case command is
         when Drop =>
           loop
@@ -58,7 +58,7 @@ package body user_interaction is
           end if;
         when Restart =>
           if Bricks_Functions.Finished then
-            Shared_Restart.Restart_Request;
+            Protected_Restart.Restart_Request;
           end if;
       end case;
     end loop;

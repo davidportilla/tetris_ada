@@ -1,6 +1,6 @@
 package body Actions is
 
-  protected body Shared_Action is
+  protected body Protected_Action is
 
     procedure SetAction(X : in ActionMode) is
     begin
@@ -14,9 +14,9 @@ package body Actions is
       flag := false;
     end GetAction;
 
-  end Shared_Action;
+  end Protected_Action;
 
-  protected body Shared_Restart is
+  protected body Protected_Restart is
 
     procedure Restart_Request is
     begin
@@ -28,6 +28,6 @@ package body Actions is
       flag := false;
     end Wait_For_Restart;
 
-  end Shared_Restart;
+  end Protected_Restart;
 
 end Actions;

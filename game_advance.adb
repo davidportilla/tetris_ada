@@ -4,7 +4,7 @@ with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Numerics.Discrete_Random;
 with Actions; use Actions;
 
-package body game_avance is
+package body game_advance is
 
   package Random_Integer is new Ada.Numerics.Discrete_Random (Integer);
   int_generator : Random_Integer.Generator;
@@ -44,9 +44,9 @@ package body game_avance is
         end loop;
         Wall.Erase_Lines;
       end loop;
-      Shared_Restart.Wait_For_Restart; -- wait until user restarts
+      Protected_Restart.Wait_For_Restart; -- wait until user restarts
     end loop;
 
   end put_and_drop;
 
-end game_avance;
+end game_advance;
