@@ -23,8 +23,8 @@ package body user_interaction is
           when '4' => Shared_Action.SetAction(Left);
           when '5' => Shared_Action.SetAction(Rotate);
           when '6' => Shared_Action.SetAction(Right);
-          when 'y' => Shared_Action.SetAction(Restart);
-          when 'n' => Shared_Action.SetAction(Exit_Tetris);
+          when 'y' | 'Y' => Shared_Action.SetAction(Restart);
+          when 'n' | 'N' => Shared_Action.SetAction(Exit_Tetris);
           when others => null;
         end case;
       end if;
@@ -54,6 +54,7 @@ package body user_interaction is
         when Right => Bricks.Move_Right;
         when Exit_Tetris =>
           if Bricks.Finished then
+            Screen.ClearScreen;
             GNAT.OS_Lib.OS_Exit(Exit_Status);
           end if;
         when Restart =>
