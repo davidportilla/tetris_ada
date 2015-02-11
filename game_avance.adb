@@ -1,4 +1,4 @@
-with Bricks;
+with Bricks; use Bricks;
 with Wall;
 with Screen;
 with Ada.Real_Time; use Ada.Real_Time;
@@ -31,7 +31,7 @@ package body game_avance is
       Random_Integer.Reset(int_generator);
       loop
         brick_style := Wall.Styles (getRandomInt mod Wall.Styles'Last + 1);
-        Bricks.Put_F(5, 2, Wall.Pick(brick_style), done);
+        Bricks_Functions.Put_F(5, 2, Wall.Pick(brick_style), done);
         exit when done;
         loop
           T := T + initial_delay - speeder;
@@ -40,7 +40,7 @@ package body game_avance is
             speeder := speeder + milliseconds(10);
           end if;
           counter := counter + 1;
-          Bricks.Drop_Brick(ok);
+          Bricks_Functions.Drop_Brick(ok);
           exit when not ok;
         end loop;
         Wall.Erase_Lines;

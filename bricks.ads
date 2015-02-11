@@ -1,8 +1,8 @@
 with Wall;
 
 package Bricks is
-   pragma Elaborate_Body;
 
+   protected Bricks_Functions is
    function Finished return Boolean;
 
    procedure Init_Game;
@@ -15,5 +15,6 @@ package Bricks is
    procedure Move_Left;
    procedure Move_Rotate;
    procedure Drop_Brick (Ok : out Boolean);
+   end Bricks_Functions;
 
 end Bricks;

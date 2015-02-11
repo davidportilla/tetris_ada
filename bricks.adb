@@ -7,20 +7,22 @@ package body Bricks is
 
    Finished_Flag : Boolean := False;
 
+   Move_X, NX            : Wall.Width;
+   Move_Y, NY            : Wall.Height;
+   New_Brick, Move_Brick : Wall.Brick_Type;
+   Exit_Flag             : Boolean := False;
+
+   protected body Bricks_Functions is
+
    --------------
    -- Finished --
    --------------
 
    function Finished return Boolean is
    begin
-      return Finished_Flag;
+     return Finished_Flag;
    end Finished;
-
-   Move_X, NX            : Wall.Width;
-   Move_Y, NY            : Wall.Height;
-   New_Brick, Move_Brick : Wall.Brick_Type;
-   Exit_Flag             : Boolean := False;
-
+   
    -------------------
    -- Init new game --
    -------------------
@@ -145,5 +147,7 @@ package body Bricks is
          Exit_Flag := True;
       end if;
    end Drop_Brick;
+
+ end Bricks_Functions;
 
 end Bricks;

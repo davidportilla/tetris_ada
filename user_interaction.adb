@@ -1,7 +1,7 @@
 with Actions; use Actions;
 with Text_IO;
 with Ada.Real_Time; use Ada.Real_Time;
-with Bricks;
+with Bricks; use Bricks;
 with Screen;
 with Wall;
 with GNAT.OS_Lib;
@@ -44,22 +44,22 @@ package body user_interaction is
       case command is
         when Drop =>
           loop
-            Bricks.Drop_Brick(ok);
+            Bricks_Functions.Drop_Brick(ok);
             exit when not ok;
             T := T + milliseconds(10);
             delay until T;
           end loop;
-        when Left => Bricks.Move_Left;
-        when Rotate => Bricks.Move_Rotate;
-        when Right => Bricks.Move_Right;
+        when Left => Bricks_Functions.Move_Left;
+        when Rotate => Bricks_Functions.Move_Rotate;
+        when Right => Bricks_Functions.Move_Right;
         when Exit_Tetris =>
-          if Bricks.Finished then
+          if Bricks_Functions.Finished then
             Screen.ClearScreen;
             GNAT.OS_Lib.OS_Exit(Exit_Status);
           end if;
         when Restart =>
-          if Bricks.Finished then
-            Bricks.Init_Game;
+          if Bricks_Functions.Finished then
+            Bricks_Functions.Init_Game;
             Shared_Restart.Restart_Request;
           end if;
       end case;
