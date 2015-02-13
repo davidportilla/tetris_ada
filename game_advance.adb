@@ -15,7 +15,7 @@ package body game_advance is
   end getRandomInt;
 
   task body put_and_drop is
-    T : Time := Clock;
+    T : Time;
     initial_delay : Time_Span := milliseconds(600);
     speeder : Time_Span;
     counter : Integer;
@@ -24,6 +24,7 @@ package body game_advance is
     brick_style : Wall.Styles;
   begin
     loop
+      T := Clock;
       Bricks_Functions.Init_Game;
       speeder := milliseconds(0);
       counter := 0;
